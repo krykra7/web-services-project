@@ -1,0 +1,48 @@
+spring:
+  servlet:
+    multipart:
+      max-file-size: 20MB
+      max-request-size: 100MB
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+image:
+  storage:
+    path: ${user.dir}/database/images/
+herbs:
+  app:
+    jwtSecret: SECRET1234567919
+    jwtExpirationMs: 86400000
+
+---
+
+spring:
+  profiles: prod
+  datasource:
+    url: jdbc:postgresql://77.55.194.9:5432/herbs
+    username: herbs
+    password: 5!dMvYR%@xL0
+    initialization-mode: always
+    driver-class-name: org.postgresql.Driver
+    dbcp2:
+      test-while-idle: true
+      test-on-borrow: true
+      max-conn-lifetime-millis: 15000
+
+---
+
+spring:
+  profiles: dev
+  datasource:
+    url: jdbc:postgresql://localhost:5432/herbs
+    username: postgres
+    password: 12345
+    initialization-mode: always
+    driver-class-name: org.postgresql.Driver
+    dbcp2:
+      test-while-idle: true
+      test-on-borrow: true
+      max-conn-lifetime-millis: 15000
