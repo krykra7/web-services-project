@@ -1,5 +1,6 @@
 package com.krawczyk.wiese.project.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.krawczyk.wiese.project.model.Industry;
 import com.krawczyk.wiese.project.model.Shop;
 import com.krawczyk.wiese.project.model.ShopIndustry;
@@ -14,6 +15,7 @@ public class ShopIndustryDto {
     private Long shopId;
     private String name;
 
+    @JsonIgnore
     public ShopIndustryDto(ShopIndustry shopIndustry) {
         this.id = shopIndustry.getId();
         this.shopId = shopIndustry.getShop().getId();
@@ -21,6 +23,7 @@ public class ShopIndustryDto {
         this.name = shopIndustry.getIndustry().getName();
     }
 
+    @JsonIgnore
     public ShopIndustry toShopIndustry() {
         ShopIndustry shopIndustry = new ShopIndustry();
         shopIndustry.setIndustry(new Industry(this.industryId, this.name));

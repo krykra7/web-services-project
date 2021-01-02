@@ -1,5 +1,6 @@
 package com.krawczyk.wiese.project.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.krawczyk.wiese.project.model.Product;
 import com.krawczyk.wiese.project.model.ShoppingList;
 
@@ -18,6 +19,7 @@ public class ShoppingListDto {
     private Date date;
     private List<ProductDto> productDtoList;
 
+    @JsonIgnore
     public ShoppingListDto(ShoppingList shoppingList) {
         this.id = shoppingList.getId();
         this.title = shoppingList.getTitle();
@@ -26,6 +28,7 @@ public class ShoppingListDto {
         this.productDtoList = parseProductList(shoppingList.getProducts());
     }
 
+    @JsonIgnore
     public ShoppingList toShoppingList() {
         ShoppingList shoppingList = new ShoppingList();
         shoppingList.setId(this.id);
@@ -37,10 +40,12 @@ public class ShoppingListDto {
         return shoppingList;
     }
 
+    @JsonIgnore
     private List<ProductDto> parseProductList(List<Product> productList) {
         return productList.stream().map(ProductDto::new).collect(Collectors.toList());
     }
 
+    @JsonIgnore
     private List<Product> parseProductDtoList() {
         return productDtoList.stream().map(ProductDto::toProduct).collect(Collectors.toList());
     }

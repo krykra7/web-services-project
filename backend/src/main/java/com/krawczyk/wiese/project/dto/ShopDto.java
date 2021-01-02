@@ -1,5 +1,6 @@
 package com.krawczyk.wiese.project.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.krawczyk.wiese.project.model.Shop;
 import com.krawczyk.wiese.project.model.ShopIndustry;
 import com.krawczyk.wiese.project.model.ShopProduct;
@@ -17,11 +18,13 @@ public class ShopDto {
     private List<ShopIndustryDto> shopIndustryDtoList;
     private List<ShopProductDto> shopProductDtoList;
 
+    @JsonIgnore
     public ShopDto(Shop shop) {
         this.id = shop.getId();
         this.name = shop.getName();
     }
 
+    @JsonIgnore
     public Shop toShop() {
         Shop shop = new Shop();
         shop.setId(this.id);
@@ -32,10 +35,12 @@ public class ShopDto {
         return shop;
     }
 
+    @JsonIgnore
     private List<ShopIndustry> parseShopIndustryDtoList() {
         return this.shopIndustryDtoList.stream().map(ShopIndustryDto::toShopIndustry).collect(Collectors.toList());
     }
 
+    @JsonIgnore
     private List<ShopProduct> parseShopProductDtoList() {
         return this.shopProductDtoList.stream().map(ShopProductDto::toShopProduct).collect(Collectors.toList());
     }
