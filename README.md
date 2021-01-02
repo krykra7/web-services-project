@@ -4,22 +4,22 @@
 
 ## Dostępne endpointy:
 ### produkt: /v1/api/product
-#### POST (zapis) - body: ProductDto
-#### PUT (edycja) - body: ProductDto
-#### GET (pobiera wszystkie)- body: puste
-#### DELETE (usuwa po id) - endpoint: /v1/api/product/{id}
+* POST (zapis) - body: ProductDto
+* PUT (edycja) - body: ProductDto
+* GET (pobiera wszystkie)- body: puste
+* DELETE (usuwa po id) - endpoint: /v1/api/product/{id}
 
 ### sklep: /v1/api/shop
-#### POST - body: ShopDto
-#### PUT (edycja) - body: ShopDto
-#### GET (pobiera wszystkie)- body: puste
-#### DELETE (usuwa po id) - endpoint: /v1/api/shop/{id}
+* POST - body: ShopDto
+* PUT (edycja) - body: ShopDto
+* GET (pobiera wszystkie)- body: puste
+* DELETE (usuwa po id) - endpoint: /v1/api/shop/{id}
 
 ### lista zakupów: /v1/api/list
-#### POST - body: ShoppingListDto
-#### PUT (edycja) - body: ShoppingListDto
-#### GET (pobiera wszystkie)- body: puste
-#### DELETE (usuwa po id) - endpoint: /v1/api/list/{id}
+* POST - body: ShoppingListDto
+* PUT (edycja) - body: ShoppingListDto
+* GET (pobiera wszystkie)- body: puste
+* DELETE (usuwa po id) - endpoint: /v1/api/list/{id}
 
 
 ### ShopProductDto json schema
