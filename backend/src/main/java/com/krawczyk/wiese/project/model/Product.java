@@ -10,14 +10,22 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import lombok.NoArgsConstructor;
+
 @Entity
+@NoArgsConstructor
 public class Product {
+
+    public Product(Long id) {
+        this.id = id;
+    }
 
     @Id
     @Column(name = "product_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(unique = true)
     private String name;
     private String protein;
     private String carbs;

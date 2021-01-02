@@ -1,7 +1,7 @@
 package com.krawczyk.wiese.project.model;
 
 import java.util.Date;
-import java.util.Set;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -30,7 +30,7 @@ public class ShoppingList {
         name = "list_product",
         joinColumns = @JoinColumn(name = "list_id"),
         inverseJoinColumns = @JoinColumn(name = "product_id"))
-    private Set<Product> products;
+    private List<Product> products;
 
     public Date getDate() {
         return date;
@@ -64,11 +64,11 @@ public class ShoppingList {
         this.note = note;
     }
 
-    public Set<Product> getProducts() {
+    public List<Product> getProducts() {
         return products;
     }
 
-    public void setProducts(Set<Product> products) {
+    public void setProducts(List<Product> products) {
         this.products = products;
     }
 }

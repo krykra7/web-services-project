@@ -10,8 +10,15 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import lombok.NoArgsConstructor;
+
 @Entity
+@NoArgsConstructor
 public class Shop {
+
+    public Shop(Long id) {
+        this.id = id;
+    }
 
     @Id
     @Column(name = "shop_id")
@@ -24,6 +31,7 @@ public class Shop {
     @OneToMany(mappedBy = "shop", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ShopIndustry> shopIndustryList;
 
+    @Column(unique = true)
     private String name;
 
     public List<ShopProduct> getShopProductList() {
