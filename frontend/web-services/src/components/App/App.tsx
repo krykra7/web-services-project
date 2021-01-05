@@ -27,7 +27,8 @@ const useStyles = makeStyles((theme: Theme) => ({
     contentContainer: {
         padding: theme.spacing(2),
         display: 'flex',
-        justifyContent: 'center',
+        alignItems: 'center',
+        flexDirection: 'column',
     },
 }))
 
