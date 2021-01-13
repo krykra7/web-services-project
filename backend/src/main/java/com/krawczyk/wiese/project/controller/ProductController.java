@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/v1/api/product")
-@CrossOrigin(value = "*")
+@CrossOrigin(origins = "*")
 public class ProductController {
 
     private final ProductCrudService productService;
@@ -52,6 +52,7 @@ public class ProductController {
 
     @ExceptionHandler(Exception.class)
     private ResponseEntity<String> handleErrors(Exception e) {
+        e.printStackTrace();
         return ResponseEntity.badRequest().body(e.getMessage());
     }
 }

@@ -9,3 +9,5 @@ const ApiProvider = (props: { children: ReactNode }) => {
 }
 
 export default ApiProvider;
+
+export {ApiContext};

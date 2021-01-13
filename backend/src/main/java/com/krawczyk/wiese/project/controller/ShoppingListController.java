@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/v1/api/list")
-@CrossOrigin(value = "*")
+@CrossOrigin(origins = "*")
 public class ShoppingListController {
 
     private final ShoppingListCrudService shoppingListService;
@@ -52,6 +52,7 @@ public class ShoppingListController {
 
     @ExceptionHandler(Exception.class)
     private ResponseEntity<String> handleErrors(Exception e) {
+        e.printStackTrace();
         return ResponseEntity.badRequest().body(e.getMessage());
     }
 }

@@ -1,5 +1,6 @@
 import React from "react";
-import {Button, makeStyles, Theme} from "@material-ui/core";
+import {Button, IconButton, makeStyles, Theme, Tooltip} from "@material-ui/core";
+import {Delete} from "@material-ui/icons";
 
 const useStyles = makeStyles((theme: Theme) => ({
     actions: {
@@ -14,6 +15,8 @@ const useStyles = makeStyles((theme: Theme) => ({
 type Props = {
     cancelHandler: () => void;
     saveHandler: () => void;
+    deleteHandler: () => void;
+    mode: string;
 }
 
 export default function ShoppingListCardFooter(props: Props) {
@@ -21,15 +24,22 @@ export default function ShoppingListCardFooter(props: Props) {
 
     return (
         <div className={classes.actions}>
-            <Button size={"small"}
-                    onClick={() => props.cancelHandler()}>
-                Anuluj
-            </Button>
-            <Button size={"small"}
-                    color={"primary"}
-                    onClick={() => props.saveHandler()}>
-                Zapisz
-            </Button>
+            {props.mode === 'readonly' && <Tooltip title={"Usuń listę"}>
+                <IconButton onClick={() => props.deleteHandler()}>
+                    <Delete/>
+                </IconButton>
+            </Tooltip>}
+            {props.mode !== 'readonly' && <div>
+                <Button size={"small"}
+                        onClick={() => props.cancelHandler()}>
+                    Anuluj
+                </Button>
+                <Button size={"small"}
+                        color={"primary"}
+                        onClick={() => props.saveHandler()}>
+                    Zapisz
+                </Button>
+            </div>}
         </div>
     )
 }

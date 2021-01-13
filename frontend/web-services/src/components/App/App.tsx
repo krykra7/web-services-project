@@ -3,6 +3,7 @@ import ApiProvider from "../Api";
 import {ToastContainer} from "react-toastify";
 import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import {Container, createMuiTheme, CssBaseline, makeStyles, MuiThemeProvider, Theme} from "@material-ui/core";
+import 'react-toastify/dist/ReactToastify.css';
 import * as ROUTES from "../../constant/routes";
 import ShoppingListGrid from "../ShoppingList";
 import Navigation from "../Navigation";
@@ -40,19 +41,19 @@ function App() {
             <CssBaseline/>
             <ApiProvider>
                 <Router>
-                    <ToastContainer
-                        position="top-right"
-                        autoClose={1800}
-                        hideProgressBar
-                        newestOnTop
-                        closeOnClick
-                        rtl={false}
-                        pauseOnFocusLoss
-                        draggable
-                        pauseOnHover
-                    />
                     <div className={classes.root}>
                         <Navigation/>
+                        <ToastContainer
+                            position="top-right"
+                            autoClose={1800}
+                            hideProgressBar
+                            newestOnTop
+                            closeOnClick
+                            rtl={false}
+                            pauseOnFocusLoss
+                            draggable
+                            pauseOnHover
+                        />
                         <Container maxWidth={false} className={classes.contentContainer}>
                             <Switch>
                                 <Route exact path={ROUTES.LANDING} component={ShoppingListGrid}/>

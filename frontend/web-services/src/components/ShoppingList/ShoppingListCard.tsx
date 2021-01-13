@@ -9,6 +9,7 @@ import {ProductDto} from "../../dto/ProductDto";
 const modes = {
     empty: "empty",
     edit: "edit",
+    readOnly: "readonly"
 }
 
 type State = {
@@ -38,6 +39,8 @@ type ShoppingCardAction = | {
         propName: string,
         value: string,
     }
+} | {
+    type: 'cleanState',
 }
 
 const shoppingCardReducer = (state: State, action: ShoppingCardAction) => {
@@ -60,12 +63,14 @@ const shoppingCardReducer = (state: State, action: ShoppingCardAction) => {
                 ...state.shoppingListData.productDtoList.slice(++action.payload.index)];
             state.shoppingListData.productDtoList = newProductList;
             return {...state, shoppingListData: state.shoppingListData};
+        case "cleanState":
+            return {mode: modes.empty, shoppingListData: {productDtoList: [] as ProductDto[]} as ShoppingListDto}
     }
 }
 
 function getDefaultState(shoppingLitData: ShoppingListDto): State {
     if (shoppingLitData) {
-        return {mode: modes.edit, shoppingListData: shoppingLitData};
+        return {mode: modes.readOnly, shoppingListData: shoppingLitData};
     } else {
         return {mode: modes.empty, shoppingListData: {productDtoList: [] as ProductDto[]} as ShoppingListDto};
     }
@@ -91,30 +96,42 @@ export default function ShoppingListCard(props: Props) {
     }
 
     const handleCancel = () => {
-
+        dispatchAction({type: 'cleanState'});
     };
 
     const handleSave = () => {
         props.saveCardHandler(state.shoppingListData);
+        dispatchAction({type: 'cleanState'});
     };
+
+    const handleDelete = () => {
+        props.deleteCardHandler(state.shoppingListData.id);
+    }
 
     return (
         <div>
             <Card elevation={3} variant={"outlined"}>
                 <ShoppingListCardTitle
+                    mode={state.mode}
                     titleChangeHandler={handleTitleChange}
                     title={state.shoppingListData.title}
                     focusedChangeHandler={handleModeChange}/>
                 <Divider/>
-                {state.mode === modes.edit && <CardContent>
+                {state.mode !== modes.empty && <CardContent>
                     <ShoppingListCardContent
+                        mode={state.mode}
                         changeProductHandler={handleProductChange}
                         addProductHandler={handleAddProductToList}
                         productList={state.shoppingListData.productDtoList}/>
                 </CardContent>}
                 <Divider/>
-                {state.mode === modes.edit && <CardActions>
-                    <ShoppingListCardFooter cancelHandler={handleCancel} saveHandler={handleSave}/>
+                {state.mode !== modes.empty && <CardActions>
+                    <ShoppingListCardFooter
+                        mode={state.mode}
+                        cancelHandler={handleCancel}
+                        saveHandler={handleSave}
+                        deleteHandler={handleDelete}
+                    />
                 </CardActions>}
             </Card>
         </div>

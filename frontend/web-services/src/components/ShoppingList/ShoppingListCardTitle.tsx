@@ -20,10 +20,15 @@ type Props = {
     titleChangeHandler: (title: string) => void;
     focusedChangeHandler: (mode: string) => void;
     title: string;
+    mode: string;
 }
 
 export default function ShoppingListCardTitle(props: Props) {
     const classes = useStyles();
+
+    const determineReadOnly = () => {
+        return props.mode === 'readonly';
+    }
 
     return (
         <InputBase
@@ -32,6 +37,7 @@ export default function ShoppingListCardTitle(props: Props) {
                 root: classes.inputRoot,
                 input: classes.input
             }}
+            inputProps={{readOnly: determineReadOnly(), disabled: determineReadOnly()}}
             onFocus={() => props.focusedChangeHandler('edit')}
             placeholder={"Tytuł"}
             multiline

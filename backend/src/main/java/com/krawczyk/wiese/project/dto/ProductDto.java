@@ -58,7 +58,11 @@ public class ProductDto {
 
     @JsonIgnore
     private List<ShopProduct> parseShopProductDtoList() {
-        return this.shopProductDtoList.stream().map(ShopProductDto::toShopProduct).collect(Collectors.toList());
+        if (this.shopProductDtoList != null) {
+            return this.shopProductDtoList.stream().map(ShopProductDto::toShopProduct).collect(Collectors.toList());
+        }
+
+        return null;
     }
 
     public long getId() {

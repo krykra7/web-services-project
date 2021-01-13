@@ -26,6 +26,7 @@ type Props = {
     productList: ProductDto[];
     addProductHandler: (productDto: ProductDto) => void;
     changeProductHandler: (index: number, propName: string, value: string) => void;
+    mode: string;
 }
 
 export default function ShoppingListCardContent(props: Props) {
@@ -39,6 +40,10 @@ export default function ShoppingListCardContent(props: Props) {
         setCurrentNewId((prevState) => ++prevState);
     }
 
+    const determineReadOnly = () => {
+        return props.mode === 'readonly';
+    }
+
     const TableRowWrapper = (itemData: { index: number, productDto: ProductDto }) => {
         return (
             <TableRow key={itemData.index}>
@@ -48,6 +53,7 @@ export default function ShoppingListCardContent(props: Props) {
                         multiline
                         placeholder="Nazwa"
                         variant="outlined"
+                        inputProps={{readOnly: determineReadOnly(), disabled: determineReadOnly()}}
                         value={itemData.productDto.name}
                         onChange={(event) => {
                             props.changeProductHandler(itemData.index, 'name', event.target.value)
@@ -65,13 +71,14 @@ export default function ShoppingListCardContent(props: Props) {
                     <TableRow>
                         <TableCell align={"center"}>Nr.</TableCell>
                         <TableCell align={"center"}>Nazwa</TableCell>
+                        {!determineReadOnly() &&
                         <TableCell align={"center"}>
                             <Tooltip title={"Dodaj produkt"}>
                                 <IconButton onClick={onAddNewClick}>
                                     <Add/>
                                 </IconButton>
                             </Tooltip>
-                        </TableCell>
+                        </TableCell>}
                     </TableRow>
                 </TableHead>
                 <TableBody>

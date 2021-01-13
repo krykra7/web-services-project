@@ -1,4 +1,4 @@
-import axios, {AxiosInstance, AxiosResponse} from "axios";
+import axios, {AxiosInstance, AxiosRequestConfig, AxiosResponse} from "axios";
 import {toast} from "react-toastify";
 import {ShoppingListDto} from "../../dto/ShoppingListDto";
 import {ShoppingListListDto} from "../../dto/ShoppingListListDto";
@@ -6,6 +6,13 @@ import {ShopDto} from "../../dto/ShopDto";
 import {ShopListDto} from "../../dto/ShopListDto";
 import {ProductDto} from "../../dto/ProductDto";
 import {ProductListDto} from "../../dto/ProductListDto";
+
+const requestDefaultConfig: AxiosRequestConfig = {
+    headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Content-type': 'application/json'
+    }
+};
 
 export default class Api {
     private axiosInstance: AxiosInstance;
@@ -31,38 +38,38 @@ export default class Api {
     };
 
     saveShoppingList = (shoppingList: ShoppingListDto): Promise<AxiosResponse<ShoppingListDto>> => {
-        return this.axiosInstance.post(`list`, shoppingList);
+        return this.axiosInstance.post(`list/`, shoppingList, requestDefaultConfig);
     };
 
     getAllShoppingLists = (): Promise<AxiosResponse<ShoppingListListDto>> => {
-        return this.axiosInstance.get(`list`);
+        return this.axiosInstance.get(`list/`, requestDefaultConfig);
     };
 
     deleteShoppingList = (shoppingListId: string): Promise<AxiosResponse<void>> => {
-        return this.axiosInstance.delete(`list/${shoppingListId}`);
+        return this.axiosInstance.delete(`list/${shoppingListId}`, requestDefaultConfig);
     };
 
     saveShop = (shop: ShopDto): Promise<AxiosResponse<ShopDto>> => {
-        return this.axiosInstance.post(`shop`, shop);
+        return this.axiosInstance.post(`shop`, shop, requestDefaultConfig);
     };
 
     getAllShops = (): Promise<AxiosResponse<ShopListDto>> => {
-        return this.axiosInstance.get(`shop`);
+        return this.axiosInstance.get(`shop`, requestDefaultConfig);
     };
 
     deleteShop = (shopId: string): Promise<AxiosResponse<void>> => {
-        return this.axiosInstance.delete(`shop/${shopId}`);
+        return this.axiosInstance.delete(`shop/${shopId}`, requestDefaultConfig);
     };
 
     saveProduct = (product: ProductDto): Promise<AxiosResponse<ProductDto>> => {
-        return this.axiosInstance.post(`product`, product);
+        return this.axiosInstance.post(`product`, product, requestDefaultConfig);
     };
 
     getAllProducts = (): Promise<AxiosResponse<ProductListDto>> => {
-        return this.axiosInstance.get(`product`);
+        return this.axiosInstance.get(`product`, requestDefaultConfig);
     };
 
     deleteProduct = (productId: string): Promise<AxiosResponse<void>> => {
-        return this.axiosInstance.delete(`product/${productId}`);
+        return this.axiosInstance.delete(`product/${productId}`, requestDefaultConfig);
     };
 }
