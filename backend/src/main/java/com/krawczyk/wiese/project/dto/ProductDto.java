@@ -53,7 +53,11 @@ public class ProductDto {
 
     @JsonIgnore
     private List<ShopProductDto> parseShopProductList(List<ShopProduct> shopProductList) {
-        return shopProductList.stream().map(ShopProductDto::new).collect(Collectors.toList());
+        if (shopProductList != null) {
+            return shopProductList.stream().map(ShopProductDto::new).collect(Collectors.toList());
+        }
+
+        return null;
     }
 
     @JsonIgnore
