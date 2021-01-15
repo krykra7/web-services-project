@@ -5,6 +5,7 @@ import com.krawczyk.wiese.project.model.Shop;
 import com.krawczyk.wiese.project.model.ShopIndustry;
 import com.krawczyk.wiese.project.model.ShopProduct;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -37,12 +38,20 @@ public class ShopDto {
 
     @JsonIgnore
     private List<ShopIndustry> parseShopIndustryDtoList() {
-        return this.shopIndustryDtoList.stream().map(ShopIndustryDto::toShopIndustry).collect(Collectors.toList());
+        if (this.shopProductDtoList != null) {
+            return this.shopIndustryDtoList.stream().map(ShopIndustryDto::toShopIndustry).collect(Collectors.toList());
+        }
+
+        return new ArrayList<>();
     }
 
     @JsonIgnore
     private List<ShopProduct> parseShopProductDtoList() {
-        return this.shopProductDtoList.stream().map(ShopProductDto::toShopProduct).collect(Collectors.toList());
+        if (this.shopProductDtoList != null) {
+            return this.shopProductDtoList.stream().map(ShopProductDto::toShopProduct).collect(Collectors.toList());
+        }
+
+        return new ArrayList<>();
     }
 
     public Long getId() {

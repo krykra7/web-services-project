@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.krawczyk.wiese.project.model.Product;
 import com.krawczyk.wiese.project.model.ShoppingList;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -42,12 +43,20 @@ public class ShoppingListDto {
 
     @JsonIgnore
     private List<ProductDto> parseProductList(List<Product> productList) {
-        return productList.stream().map(ProductDto::new).collect(Collectors.toList());
+        if (productList != null) {
+            return productList.stream().map(ProductDto::new).collect(Collectors.toList());
+        }
+
+        return new ArrayList<>();
     }
 
     @JsonIgnore
     private List<Product> parseProductDtoList() {
-        return productDtoList.stream().map(ProductDto::toProduct).collect(Collectors.toList());
+        if (this.productDtoList != null) {
+            return productDtoList.stream().map(ProductDto::toProduct).collect(Collectors.toList());
+        }
+
+        return new ArrayList<>();
     }
 
 

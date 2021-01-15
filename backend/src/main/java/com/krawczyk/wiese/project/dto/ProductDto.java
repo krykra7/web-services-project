@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.krawczyk.wiese.project.model.Product;
 import com.krawczyk.wiese.project.model.ShopProduct;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -57,7 +58,7 @@ public class ProductDto {
             return shopProductList.stream().map(ShopProductDto::new).collect(Collectors.toList());
         }
 
-        return null;
+        return new ArrayList<>();
     }
 
     @JsonIgnore
@@ -66,7 +67,7 @@ public class ProductDto {
             return this.shopProductDtoList.stream().map(ShopProductDto::toShopProduct).collect(Collectors.toList());
         }
 
-        return null;
+        return new ArrayList<>();
     }
 
     public long getId() {

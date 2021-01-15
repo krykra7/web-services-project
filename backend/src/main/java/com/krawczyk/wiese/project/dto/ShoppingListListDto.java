@@ -3,6 +3,7 @@ package com.krawczyk.wiese.project.dto;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.krawczyk.wiese.project.model.ShoppingList;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -15,7 +16,11 @@ public class ShoppingListListDto {
 
     @JsonIgnore
     public ShoppingListListDto(List<ShoppingList> shoppingListList) {
-        this.shoppingListDtoList = shoppingListList.stream().map(ShoppingListDto::new).collect(Collectors.toList());
+        if (shoppingListList != null) {
+            this.shoppingListDtoList = shoppingListList.stream().map(ShoppingListDto::new).collect(Collectors.toList());
+        } else {
+            this.shoppingListDtoList = new ArrayList<>();
+        }
     }
 
     public List<ShoppingListDto> getShoppingListDtoList() {

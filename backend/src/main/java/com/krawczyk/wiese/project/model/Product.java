@@ -1,5 +1,6 @@
 package com.krawczyk.wiese.project.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -35,7 +36,7 @@ public class Product {
     private String type;
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<ShopProduct> shopProductList;
+    private List<ShopProduct> shopProductList = new ArrayList<>();
 
     public List<ShopProduct> getShopProductList() {
         return shopProductList;
