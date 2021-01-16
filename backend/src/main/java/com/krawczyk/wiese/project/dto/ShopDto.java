@@ -23,32 +23,56 @@ public class ShopDto {
     public ShopDto(Shop shop) {
         this.id = shop.getId();
         this.name = shop.getName();
+        this.shopIndustryDtoList = parseShopIndustryList(shop.getShopIndustryList());
+        this.shopProductDtoList = parseShopProductList(shop.getShopProductList());
     }
 
     @JsonIgnore
     public Shop toShop() {
         Shop shop = new Shop();
         shop.setId(this.id);
-        shop.setShopIndustryList(parseShopIndustryDtoList());
-        shop.setShopProductList(parseShopProductDtoList());
+        shop.setShopIndustryList(parseShopIndustryDtoList(shop));
+        shop.setShopProductList(parseShopProductDtoList(shop));
         shop.setName(this.name);
 
         return shop;
     }
 
     @JsonIgnore
-    private List<ShopIndustry> parseShopIndustryDtoList() {
-        if (this.shopProductDtoList != null) {
-            return this.shopIndustryDtoList.stream().map(ShopIndustryDto::toShopIndustry).collect(Collectors.toList());
+    private List<ShopIndustryDto> parseShopIndustryList(List<ShopIndustry> shopIndustryList) {
+        if (shopIndustryList != null) {
+            return shopIndustryList.stream().map(ShopIndustryDto::new).collect(Collectors.toList());
         }
 
         return new ArrayList<>();
     }
 
     @JsonIgnore
-    private List<ShopProduct> parseShopProductDtoList() {
+    private List<ShopProductDto> parseShopProductList(List<ShopProduct> shopProductList) {
+        if (shopProductList != null) {
+            return shopProductList.stream().map(ShopProductDto::new).collect(Collectors.toList());
+        }
+
+        return new ArrayList<>();
+    }
+
+    @JsonIgnore
+    private List<ShopIndustry> parseShopIndustryDtoList(Shop shop) {
+        if (this.shopIndustryDtoList != null) {
+            return this.shopIndustryDtoList.stream().map(shopIndustryDto -> {
+                return shopIndustryDto.toShopIndustry(shop);
+            }).collect(Collectors.toList());
+        }
+
+        return new ArrayList<>();
+    }
+
+    @JsonIgnore
+    private List<ShopProduct> parseShopProductDtoList(Shop shop) {
         if (this.shopProductDtoList != null) {
-            return this.shopProductDtoList.stream().map(ShopProductDto::toShopProduct).collect(Collectors.toList());
+            return this.shopProductDtoList.stream().map((shopProductDto -> {
+                return shopProductDto.toShopProduct(shop);
+            })).collect(Collectors.toList());
         }
 
         return new ArrayList<>();

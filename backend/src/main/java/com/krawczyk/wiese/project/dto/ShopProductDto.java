@@ -34,6 +34,28 @@ public class ShopProductDto {
         return shopProduct;
     }
 
+    @JsonIgnore
+    public ShopProduct toShopProduct(Shop shop) {
+        ShopProduct shopProduct = new ShopProduct();
+        shopProduct.setId(this.id);
+        shopProduct.setShop(shop);
+        shopProduct.setProduct(new Product(this.productId));
+        shopProduct.setPrice(this.price);
+
+        return shopProduct;
+    }
+
+    @JsonIgnore
+    public ShopProduct toShopProduct(Product product){
+        ShopProduct shopProduct = new ShopProduct();
+        shopProduct.setId(this.id);
+        shopProduct.setShop(new Shop(this.shopId));
+        shopProduct.setProduct(product);
+        shopProduct.setPrice(this.price);
+
+        return shopProduct;
+    }
+
     public Long getId() {
         return id;
     }

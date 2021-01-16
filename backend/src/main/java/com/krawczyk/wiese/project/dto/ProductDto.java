@@ -47,7 +47,7 @@ public class ProductDto {
         product.setCalories(this.calories);
         product.setSize(this.size);
         product.setType(this.type);
-        product.setShopProductList(parseShopProductDtoList());
+        product.setShopProductList(parseShopProductDtoList(product));
 
         return product;
     }
@@ -62,9 +62,11 @@ public class ProductDto {
     }
 
     @JsonIgnore
-    private List<ShopProduct> parseShopProductDtoList() {
+    private List<ShopProduct> parseShopProductDtoList(Product product) {
         if (this.shopProductDtoList != null) {
-            return this.shopProductDtoList.stream().map(ShopProductDto::toShopProduct).collect(Collectors.toList());
+            return this.shopProductDtoList.stream().map((shopProductDto -> {
+                return shopProductDto.toShopProduct(product);
+            })).collect(Collectors.toList());
         }
 
         return new ArrayList<>();

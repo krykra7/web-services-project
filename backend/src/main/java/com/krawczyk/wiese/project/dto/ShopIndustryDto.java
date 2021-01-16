@@ -24,10 +24,10 @@ public class ShopIndustryDto {
     }
 
     @JsonIgnore
-    public ShopIndustry toShopIndustry() {
+    public ShopIndustry toShopIndustry(Shop shop) {
         ShopIndustry shopIndustry = new ShopIndustry();
         shopIndustry.setIndustry(new Industry(this.industryId, this.name));
-        shopIndustry.setShop(new Shop(this.shopId));
+        shopIndustry.setShop(shop);
         shopIndustry.setId(this.id);
 
         return shopIndustry;
