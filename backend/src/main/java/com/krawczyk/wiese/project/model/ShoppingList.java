@@ -25,7 +25,7 @@ public class ShoppingList {
     private String note;
     private Date date;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany
     @JoinTable(
         name = "list_product",
         joinColumns = @JoinColumn(name = "list_id"),

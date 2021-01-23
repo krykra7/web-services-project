@@ -28,7 +28,7 @@ export default function ShoppingListGrid() {
     }, [])
 
     const handleSaveNewList = (shoppingListData: ShoppingListDto): void => {
-        shoppingListData.productDtoList = shoppingListData.product  DtoList.map((productDto) => {
+        shoppingListData.productDtoList = shoppingListData.productDtoList.map((productDto) => {
             if (productDto.id.substring(0, 3) === 'new') {
                 return {...productDto, id: null};
             } else {
