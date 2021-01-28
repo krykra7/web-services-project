@@ -51,6 +51,7 @@ const shoppingCardReducer = (state: State, action: ShoppingCardAction) => {
             state.shoppingListData['title'] = action.payload;
             return {...state, shoppingListData: state.shoppingListData};
         case "addProduct":
+            action.payload.id = "1";
             state.shoppingListData.productDtoList.push(action.payload);
             return {...state, shoppingListData: state.shoppingListData};
         case "changeProduct":
@@ -64,7 +65,10 @@ const shoppingCardReducer = (state: State, action: ShoppingCardAction) => {
             state.shoppingListData.productDtoList = newProductList;
             return {...state, shoppingListData: state.shoppingListData};
         case "cleanState":
-            return {mode: modes.empty, shoppingListData: {productDtoList: [] as ProductDto[]} as ShoppingListDto}
+            return {
+                mode: modes.empty,
+                shoppingListData: {title: "", productDtoList: [] as ProductDto[]} as ShoppingListDto
+            }
     }
 }
 

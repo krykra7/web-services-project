@@ -47,7 +47,7 @@ export default function ShoppingListCardContent(props: Props) {
     const TableRowWrapper = (itemData: { index: number, productDto: ProductDto }) => {
         return (
             <TableRow key={itemData.index}>
-                <TableCell align={"center"} component={"th"}>{itemData.index}.</TableCell>
+                <TableCell align={"center"} component={"th"}>{itemData.index + 1}.</TableCell>
                 <TableCell align={"center"}>
                     <TextField
                         multiline

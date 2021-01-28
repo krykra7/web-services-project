@@ -1,6 +1,7 @@
 import {ShopProductDto} from "./ShopProductDto";
 
 export type ProductDto = {
+    [key: string]: any;
     id?: string;
     name?: string;
     protein?: string;

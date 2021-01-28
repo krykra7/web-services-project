@@ -7,6 +7,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import * as ROUTES from "../../constant/routes";
 import ShoppingListGrid from "../ShoppingList";
 import Navigation from "../Navigation";
+import Product from "../Product";
+import Shop from "../Shop";
 
 const theme = createMuiTheme({
     // overrides: {
@@ -44,7 +46,7 @@ function App() {
                     <div className={classes.root}>
                         <Navigation/>
                         <ToastContainer
-                            position="top-right"
+                            position="bottom-right"
                             autoClose={1800}
                             hideProgressBar
                             newestOnTop
@@ -57,8 +59,8 @@ function App() {
                         <Container maxWidth={false} className={classes.contentContainer}>
                             <Switch>
                                 <Route exact path={ROUTES.LANDING} component={ShoppingListGrid}/>
-                                <Route path={ROUTES.PRODUCT} component={ShoppingListGrid}/>
-                                <Route path={ROUTES.SHOP} component={ShoppingListGrid}/>
+                                <Route path={ROUTES.PRODUCT} component={Product}/>
+                                <Route path={ROUTES.SHOP} component={Shop}/>
                             </Switch>
                         </Container>
                     </div>

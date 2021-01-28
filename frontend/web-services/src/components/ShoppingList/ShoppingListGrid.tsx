@@ -11,6 +11,10 @@ const useStyles = makeStyles((theme: Theme) => ({
     emptyCard: {
         width: theme.spacing(60),
         paddingBottom: theme.spacing(2),
+    },
+    gridContainer: {
+        flexGrow: 1,
+        width: "100%"
     }
 }))
 
@@ -61,18 +65,20 @@ export default function ShoppingListGrid() {
             <div className={classes.emptyCard}>
                 <ShoppingListCard saveCardHandler={handleSaveNewList}/>
             </div>
-            <div>
+            <div className={classes.gridContainer}>
                 <Grid container spacing={3}>
                     {shoppingList.map((shoppingListData: ShoppingListDto, index: number) => {
-                        let xs: any = 4;
-                        console.log(shoppingList.length);
+                        let xs: any;
                         if (shoppingList.length < 3) {
                             if (shoppingList.length < 2) {
                                 xs = 12;
                             } else {
                                 xs = 6;
                             }
+                        }else{
+                            xs = 4;
                         }
+                        console.log(xs);
 
                         return (
                             <Grid key={index} item xs={xs}>

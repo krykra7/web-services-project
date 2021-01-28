@@ -19,7 +19,7 @@ export default class Api {
 
     constructor() {
         this.axiosInstance = axios.create({
-            baseURL: 'http://localhost:8080/v1/api/',
+            baseURL: 'http://localhost:8081/v1/api/',
             headers: {
                 'Access-Control-Allow-Origin': '*',
                 'Content-type': 'application/json'
@@ -50,11 +50,11 @@ export default class Api {
     };
 
     saveShop = (shop: ShopDto): Promise<AxiosResponse<ShopDto>> => {
-        return this.axiosInstance.post(`shop`, shop, requestDefaultConfig);
+        return this.axiosInstance.post(`shop/`, shop, requestDefaultConfig);
     };
 
     getAllShops = (): Promise<AxiosResponse<ShopListDto>> => {
-        return this.axiosInstance.get(`shop`, requestDefaultConfig);
+        return this.axiosInstance.get(`shop/`, requestDefaultConfig);
     };
 
     deleteShop = (shopId: string): Promise<AxiosResponse<void>> => {
@@ -62,11 +62,11 @@ export default class Api {
     };
 
     saveProduct = (product: ProductDto): Promise<AxiosResponse<ProductDto>> => {
-        return this.axiosInstance.post(`product`, product, requestDefaultConfig);
+        return this.axiosInstance.post(`product/`, product, requestDefaultConfig);
     };
 
     getAllProducts = (): Promise<AxiosResponse<ProductListDto>> => {
-        return this.axiosInstance.get(`product`, requestDefaultConfig);
+        return this.axiosInstance.get(`product/`, requestDefaultConfig);
     };
 
     deleteProduct = (productId: string): Promise<AxiosResponse<void>> => {
