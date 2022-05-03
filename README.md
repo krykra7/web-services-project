@@ -1,6 +1,6 @@
 # web-services-project
 
-## Projekt na przedmiot serwisy sieciowe
+## Projekt na przedmiot serwisy sieciowe | Project for educational purposes during studies
 
 ## Dostępne endpointy:
 ### produkt: /v1/api/product
